@@ -7,34 +7,26 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build and Run Docker Image in WSL') {
+        stage('Build and Run Docker Image in PowerShell') {
             steps {
                 script {
                     // Define the PowerShell script
                     def powerShellScript = """
-
-                        wsl
-                        echo '123456789' | wsl
- 
-
+                        # Build Docker image
+                        docker build -t your-image-name .
                         
-
+                        # Run Docker container
+                        docker run -it your-image-name
                     """
 
- 
-
-                   
- 
-
-                       
-                     
+                    // Execute the PowerShell script
                     bat(script: powerShellScript, returnStatus: true)
                 }
             }
         }
         stage('Testing') {
             steps {
-               echo 'Testing'
+                echo 'Testing'
             }
         }
     }
