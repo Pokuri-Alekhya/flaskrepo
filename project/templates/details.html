@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+   Details page
+{% endblock %}
+{% block content %}
+{% if current_user.is_authenticated %}
+<div class="card container" style="width: 25rem; margin-left: auto; margin-top: 1%;">
+  <div class="card-body">
+    <h5 class="card-title">Firstname</h5>
+    <p class="card-text">{{current_user.Firstname}}</p>
+    <h5 class="card-title">Lastname</h5>
+    <p class="card-text">{{current_user.Lastname}}</p>
+    <h5 class="card-title">Email</h5>
+    <p class="card-text">{{current_user.Email}}</p>
+    <h5 class="card-title">Phone number</h5>
+    <p class="card-text">{{current_user.PhoneNumber}}</p>
+    <h5 class="card-title">Date of Birth</h5>
+    <p class="card-text">{{current_user.DOB}}</p>
+    <h5 class="card-title">Address</h5>
+    <p class="card-text">{{current_user.Address}}</p>
+    <h5 class="card-title">Role</h5>
+    <p class="card-text">{{current_user.Role}}</p>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

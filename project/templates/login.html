@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+login page
+{% endblock %}
+{% block content %}
+<div class="container">
+    <form method="POST" class="form-register" style="color:white;align-items:center;">
+      {{lf.hidden_tag()}}
+      <br>
+      <br>
+    {{lf.Username.label()}}
+    {{lf.Username(class="form-control",placeholder="user name")}}
+    <br>
+    {{lf.Logintype.label()}}
+    {{lf.Logintype(class="form-control",placeholder="select")}}
+     <br>
+    {{lf.Password.label()}}
+    {{lf.Password(class="form-control",placeholder="Password")}}
+    <br>
+    {{lf.submit(class="btn btn-lg btn-block btn-primary")}}
+     
+
+     <br>
+     <div class="d-flex justify-content-center"></div>
+     
+         <h6>Do not have a account ??</h6>
+         <a class="btn btn-sm btn-secondary" href="{{url_for('register')}}">sign up</a>
+     
+     </div>
+  
+
+    </form>
+  </div>
+ {% endblock %} 

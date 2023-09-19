@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+register page
+{% endblock %}
+{% block content %}
+<br>
+<div class="d-flex justify-content-center" style="text-align:center;color:azure">
+     
+         <h3 style="color:black">Create account here</h6>
+     </div>
+
+<div class="container">
+    <form method="POST" class="form-register" style="color:black">
+    {{form.hidden_tag()}}
+    
+    
+    {{form.Firstname.label()}}
+    {{form.Firstname(class="form-control",placeholder="First name")}}
+    <br>
+    {{form.Lastname.label()}}
+    {{form.Lastname(class="form-control",placeholder="Last name")}}
+    <br>
+    {{form.Email.label()}}
+    {{form.Email(class="form-control",placeholder="enter email address")}}
+     <br>
+    {{form.PhoneNumber.label()}}
+    {{form.PhoneNumber(class="form-control",placeholder="Phone number")}}
+    <br>
+    {{form.DOB.label()}}
+    {{form.DOB(class="form-control",placeholder="date of birth")}}
+     <br>
+    {{form.Address.label()}}
+    {{form.Address(class="form-control",placeholder="Address")}}
+    <br>
+
+    {{form.Password.label()}}
+    {{form.Password(class="form-control",placeholder="Password")}}
+    <br>
+    {{form.Confirmpwd.label()}}
+    {{form.Confirmpwd(class="form-control",placeholder=" confirm password")}}
+    <br>
+    {{form.submit(class="btn btn-primary btn-block btn-lg")}}
+     <br>
+     <br>
+     {% if current_user.Role=='admin'%}
+     {% else %}
+     <div class="d-flex justify-content-center"></div>
+     
+         <h6>Already have a account ??</h6>
+         <a class="btn btn-sm btn-primary" href="{{url_for('login')}}">Login in</a>
+     
+     </div>
+    {% endif %}
+  
+     
+    </form>
+
+</div>
+{% endblock %}
+         

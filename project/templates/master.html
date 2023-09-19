@@ -1,0 +1,86 @@
+
+
+{% extends 'base.html' %}
+{% block title %} 
+ display page
+{% endblock %}
+
+{% block content %}
+
+<form style="color:black" id='Form' method="get">
+  <br>
+  {{ form.hidden_tag() }}
+  {{form.Name.label()}}
+  {{ form.Name(placeholder="Enter Name",class="col-4") }}
+  {{form.Address.label()}}
+  {{ form.Address(placeholder="Enter Address",class='col-4') }}
+  {{ form.search(class="btn btn-primary") }}
+</form>
+<br><br>
+<table class="table ">
+    <thead class="thead-dark">
+      <tr>
+        
+        
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr class="table-light">
+                <td>{{item.Firstname}}</td>
+                <td>{{item.Lastname}}</td>
+                <td>{{item.Email}}</td>
+                
+                
+                
+            </tr>
+        
+        {% endfor %}
+    
+  </table>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#Form').on('submit', function(event) {
+        event.preventDefault();
+        var name = $('#Name').val();
+        var address = $('#Address').val();
+        $.ajax({
+          url: '/api/search',
+          type: 'GET',
+          data: {name: name, address: address},
+          success: function(response) {
+            var users = response.employees;
+            var tableRows = "";
+            if (users.length==0)
+            {
+              errors=document.getElementById('errors');
+              errors.style.display="block";
+              span_error=document.getElementById("search_error")
+              span_error.innerHTML="No employee found with given details";
+            }
+
+            for(var i = 0; i < users.length; i++) {
+              tableRows += "<tr><td>" + users[i].Firstname + "</td><td>" + users[i].Lastname + "</td><td>" + users[i].Email;
+            }
+            $('tbody').html(tableRows);
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+    });
+    </script>
+    
+
+  <style>
+    body{
+      color:white;
+    }
+  </style>
+{% endblock %}
+
