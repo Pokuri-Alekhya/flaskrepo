@@ -23,13 +23,13 @@ pipeline {
 
  
 
-                    sh "echo 'root' | wsl"
+                    bat "echo '123456789' | wsl"
 
  
 
                        
-                     sh "docker build -t your-image-name ."
-                     sh "docker run -it your-image-name"
+                     bat "docker build -t your-image-name ."
+                     bat "docker run -it your-image-name"
                     bat(script: powerShellScript, returnStatus: true)
                 }
             }
