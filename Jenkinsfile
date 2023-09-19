@@ -7,16 +7,32 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build Image') {
+        stage('Build and Run Docker Image in WSL') {
             steps {
-                bat 'docker build -t myflaskimage:v1 .'
+                script {
+                    // Define the PowerShell script
+                    def powerShellScript = """
+                        # Start WSL
+                        wsl
+
+ 
+
+                        # Send 'root' as the password
+                        echo '123456789' | wsl
+
+ 
+
+                        # You are now inside the WSL environment, run Docker commands
+                        docker build -t your-image-name .
+                        docker run -it your-image-name
+                    """
+
+ 
+
+                    // Execute the PowerShell script in PowerShell
+                    bat(script: powerShellScript, returnStatus: true)
+                }
             }
-        }
-        stage('Run Image') {
-            steps {
-                sh 'sudo docker run -d --name flaskcontainer myflaskimage:v1'
-            }
-            
         }
         stage('Testing') {
             steps {
