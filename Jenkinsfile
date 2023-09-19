@@ -14,7 +14,7 @@ pipeline {
                     def powerShellScript = """
 
                         wsl
-
+                        echo '123456789' | wsl
  
 
                         
@@ -23,13 +23,11 @@ pipeline {
 
  
 
-                    bat "echo '123456789' | wsl"
-
+                   
  
 
                        
-                     bat "docker build -t your-image-name ."
-                     bat "docker run -it your-image-name"
+                     
                     bat(script: powerShellScript, returnStatus: true)
                 }
             }
