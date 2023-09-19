@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                bat 'sudo docker build -t myflaskimage:v1 .'
+                bat 'docker build -t myflaskimage:v1 .'
             }
         }
         stage('Run Image') {
