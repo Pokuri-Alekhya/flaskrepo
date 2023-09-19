@@ -12,14 +12,13 @@ pipeline {
                 script {
                     // Define the PowerShell script
                     def powerShellScript = """
-                        # Start WSL
+                
                         wsl
+                        123456789
 
  
 
-                        # Send 'root' as the password
-                        echo '123456789' | wsl
-
+                       
  
 
                         # You are now inside the WSL environment, run Docker commands
