@@ -7,23 +7,16 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build and Run Docker Image in PowerShell') {
+        stage('Build and Push Docker Image') {
             steps {
                 script {
-                    // Define the PowerShell script
-                    def powerShellScript = """
-                        # Build Docker image
-                        docker build -t your-image-name .
-                        
-                        # Run Docker container
-                        docker run -it your-image-name
-                    """
-
-                    // Execute the PowerShell script
-                    bat(script: powerShellScript, returnStatus: true)
+                    // Run Docker commands in WSL as the root user
+                    bat "wsl sudo -S docker build -t my-docker-image:latest . <<< '123456789'"
+                   
                 }
             }
         }
+            
         stage('Testing') {
             steps {
                 echo 'Testing'
