@@ -1,28 +1,36 @@
 pipeline {
     agent any
-    environment {
-        PATH = "/usr/bin/docker"  // Update with the actual path to the Docker binary
-    }
+
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
+                // Check out your Flask application source code from a Git repository
                 checkout scm
             }
         }
-        stage('Build Image') {
+
+        stage('Build Docker Image') {
             steps {
-                sh 'docker build -t myflaskimage:v1 .'
+                // Build a Docker image for your Flask application
+                script {
+                    docker.build("myflaskimage:v1", "-f Dockerfile .")
+                }
             }
         }
-        stage('Run Image') {
+
+        stage('Run Docker Container') {
             steps {
-                sh 'sudo docker run -d --name flaskcontainer myflaskimage:v1'
+                // Run a Docker container using the built image
+                script {
+                    docker.image("myflaskimage:v1").run("-d -p 80:5000 --name flaskcontainer")
+                }
             }
-            
         }
+
         stage('Testing') {
             steps {
-               echo 'Testing'
+                // Perform testing or other tasks
+                echo 'Testing'
             }
         }
     }
