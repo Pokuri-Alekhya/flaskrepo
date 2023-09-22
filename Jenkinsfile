@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        PATH = "/usr/bin/docker"  // Update with the actual path to the Docker binary
+    }
     stages {
         stage('Clone Repository') {
             steps {
