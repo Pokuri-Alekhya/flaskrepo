@@ -7,21 +7,20 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build and Push Docker Image') {
+        stage('Build Image') {
             steps {
-                script {
-                    // Run Docker commands in WSL as the root user
-                    bat "wsl sudo -S docker build -t my-docker-image:latest . "
-                    bat '123456789'
-                    
-                   
-                }
+                sh 'sudo docker build -t myflaskimage:v1 .'
             }
         }
+        stage('Run Image') {
+            steps {
+                sh 'sudo docker run -d --name flaskcontainer myflaskimage:v1'
+            }
             
+        }
         stage('Testing') {
             steps {
-                echo 'Testing'
+               echo 'Testing'
             }
         }
     }
