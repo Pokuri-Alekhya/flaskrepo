@@ -2,36 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                // Check out your Flask application source code from a Git repository
                 checkout scm
             }
         }
-
-        stage('Build Docker Image') {
+        stage('Build Image') {
             steps {
-                // Build a Docker image for your Flask application
                 script {
-                    docker.build("myflaskimage:v1", "-f Dockerfile .")
+                    // Build the Docker image with the Flask application
+                    sh 'docker build -t myflaskimage:v1 .'
                 }
             }
         }
-
-        stage('Run Docker Container') {
+        stage('Run Image') {
             steps {
-                // Run a Docker container using the built image
                 script {
-                    docker.image("myflaskimage:v1").run("-d -p 80:5000 --name flaskcontainer")
+                    // Run the Docker container and map port 8080 to 5000
+                    sh 'docker run -d --name flaskcontainer -p 80:80 myflaskimage:v1'
                 }
             }
         }
-
-        stage('Testing') {
-            steps {
-                // Perform testing or other tasks
-                echo 'Testing'
-            }
-        }
+      
     }
 }
