@@ -24,7 +24,7 @@ pipeline {
 
             steps {
 
-                sh 'sudo docker build -t myflaskimage:v1 .'
+                sh 'sudo docker build -t imageflask:latest .'
 
             }
 
@@ -34,7 +34,7 @@ pipeline {
 
             steps {
 
-                sh 'sudo docker run -d -p 5000:5000 myflaskimage:v1'
+                sh 'sudo docker run -d -p 5000:5000 imageflask:latest'
 
  
 
