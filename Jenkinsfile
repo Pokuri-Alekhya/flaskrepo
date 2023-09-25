@@ -34,7 +34,7 @@ pipeline {
 
             steps {
 
-                sh 'sudo docker run -d -p 5000:5000 imageflask:latest'
+                sh 'sudo docker run -d -p 6000:6000 imageflask:latest'
 
  
 
