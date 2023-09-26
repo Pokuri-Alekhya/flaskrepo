@@ -2,7 +2,11 @@ pipeline {
 
     agent any
 
- 
+    stages{
+        triggers {
+        githubPush()
+        // Add more triggers for other events if needed
+    }
 
  
 
