@@ -5,15 +5,8 @@ pipeline {
     stages{
         triggers {
         githubPush()
-        // Add more triggers for other events if needed
-    }
-
- 
-
- 
-
-   
-
+        
+       }
         stage('Clone Repository') {
 
             steps {
@@ -39,13 +32,7 @@ pipeline {
             steps {
 
                 sh 'sudo docker run -d --name containerflask -p 5000:5000 imageflask1:latest'
-
- 
-
             }
-
- 
-
         }
 
         stage('Testing') {
