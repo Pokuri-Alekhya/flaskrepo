@@ -8,11 +8,7 @@ pipeline {
 
  
 
-    stages {
-        triggers {
-        githubPush()
-        
-    }
+   
 
         stage('Clone Repository') {
 
